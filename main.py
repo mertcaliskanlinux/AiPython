@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import matplotlib.pyplot as plt
 import time
 from matplotData.main import Plotter
 
@@ -54,11 +53,11 @@ def train(model, X, y, epochs, target_loss):
     loss_values = []
 
     for epoch in range(epochs):
-        optimizer.zero_grad()
-        outputs = model(X)
-        loss = criterion(outputs, y)
-        loss.backward()
-        optimizer.step()
+        optimizer.zero_grad() # Her epoch'ta gradyanları sıfırla
+        outputs = model(X)   # Modelden çıktıları al
+        loss = criterion(outputs, y) # Hesaplanan kayıp
+        loss.backward() # Geriye doğru gradyanları hesapla
+        optimizer.step() # Ağırlıkları güncelle
 
         loss_values.append(loss.item())
 
@@ -79,8 +78,8 @@ def main():
     model = SimpleHousePricePredictor()
     epochs = 500
     loss_values = train(model, X, y, epochs, target_loss=0.001)
-
     # Kayıp değerlerini görselleştirme
+
     Plotter().plot_loss(loss_values)
 
     model.eval()
