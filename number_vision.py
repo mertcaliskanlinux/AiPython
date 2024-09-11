@@ -29,3 +29,11 @@ train_dataset = datasets.MNIST(root='./data', train=True, download=True, transfo
 # Test veri setini yükle
 test_dataset = datasets.MNIST(root='./data', train=False,transform=transforms_orginals)
 
+# NumPy dizisi ve dönüşümleri tanımla
+random_image = train_dataset[20][0].numpy() * std_grat + mean_grat
+
+# Resmi çizdir
+plt.imshow(random_image.reshape(28,28), cmap='gray')
+plt.title('MNIST Image')
+plt.savefig('mnist_image.png')
+plt.close()
