@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import time
+from matplotData.main import Plotter
 
 
 # Veri seti oluşturma ve normalize etme
@@ -80,14 +81,7 @@ def main():
     loss_values = train(model, X, y, epochs, target_loss=0.001)
 
     # Kayıp değerlerini görselleştirme
-    plt.figure()
-    plt.plot(range(1, len(loss_values) + 1), loss_values, marker='o')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.title('Training Loss Over Epochs')
-    plt.grid(True)
-    plt.savefig('train_loss_plot.png')
-    plt.close()
+    Plotter().plot_loss(loss_values)
 
     model.eval()
 
@@ -98,23 +92,16 @@ def main():
     predictions = predictions * y_std + y_mean
 
     # Tahminleri ve gerçek değerleri görselleştirme
-    plt.figure()
-    plt.scatter(range(len(y)), y * y_std + y_mean, color='blue', label='Gerçek Fiyatlar')
-    plt.scatter(range(len(predictions)), predictions, color='red', label='Tahminler')
-    plt.xlabel('Ev İndeksi')
-    plt.ylabel('Fiyat')
-    plt.title('Gerçek Ev Fiyatları ve Model Tahminleri')
-    plt.legend()
-    plt.grid(True)
-    plt.savefig('house_price_predictions.png')
-    plt.close()
+
+
+    Plotter().plot_predictions(y, y_std,y_mean,predictions)
 
     for i in range(len(y)):
         print(f"Girdi: {X[i].tolist()} - Tahmin: {predictions[i].item()}")
 
 
 if __name__ == '__main__':
-    for i in range(20):
+    for i in range(2):
         print(f"Deneme {i + 1}")
         time.sleep(0.5)
         main()
