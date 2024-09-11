@@ -10,3 +10,22 @@ import matplotlib.pyplot as plt # Grafik çizdirmek için matplotlib'ı içe akt
 from PIL import Image # Resimleri açmak için PIL kütüphanesini içe aktar
 import numpy as np # Dizilerle işlem yapmak için numpy kütüphanesini içe aktar
 
+
+#precomputed mean and std values for MNIST dataset
+# MNIST veri setinin ortalama değeri
+mean_grat = 0.1307 
+std_grat = 0.3081 
+
+# Dönüşümleri tanımla
+transforms_orginals = transforms.Compose([transforms.ToTensor(), transforms.Normalize((mean_grat,), (std_grat,))])
+
+
+transforms_photo = transforms.Compose([transforms.Resize((28,28)),transforms.ToTensor(),transforms.Normalize((mean_grat,), (std_grat,))])
+
+
+# Eğitim veri setini yükle
+train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transforms_orginals) 
+
+# Test veri setini yükle
+test_dataset = datasets.MNIST(root='./data', train=False,transform=transforms_orginals)
+
