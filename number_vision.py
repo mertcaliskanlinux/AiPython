@@ -9,3 +9,4 @@ from torch.utils.data import DataLoader, TensorDataset # DataLoader ve TensorDat
 import matplotlib.pyplot as plt # Grafik çizdirmek için matplotlib'ı içe aktar
 from PIL import Image # Resimleri açmak için PIL kütüphanesini içe aktar
 import numpy as np # Dizilerle işlem yapmak için numpy kütüphanesini içe aktar
+
