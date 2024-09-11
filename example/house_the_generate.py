@@ -22,13 +22,13 @@ def generate_house_data():
     y = torch.tensor([y for _, y in data], dtype=torch.float32).view(-1, 1)
 
     # Veriyi normalize etme
-    X_mean = X.mean(dim=0)
-    X_std = X.std(dim=0)
-    y_mean = y.mean()
-    y_std = y.std()
+    X_mean = X.mean(dim=0) # Her sütunun ortalamasını al
+    X_std = X.std(dim=0)  # Her sütunun standart sapmasını al
+    y_mean = y.mean() # Tüm çıktıların ortalamasını al
+    y_std = y.std() # Tüm çıktıların standart sapmasını al
 
-    X_normalized = (X - X_mean) / X_std
-    y_normalized = (y - y_mean) / y_std
+    X_normalized = (X - X_mean) / X_std # Veriyi normalize et
+    y_normalized = (y - y_mean) / y_std # Çıktıyı normalize et
     
     return X_normalized, y_normalized, X_mean, X_std, y_mean, y_std
 
